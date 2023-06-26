@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <title>Weather App</title>
+    <script>
+        function getCurrentWeather() {
+            // API endpoint and API key
+            const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=London&appid=9cef1dc7c670e8d8b77a41dada24f294';
+
+            // Fetch the weather data from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the weather description
+                    const weatherDescription = data.weather[0].description;
+
+                    // Update the weatherData div with the weather information
+                    const weatherDataDiv = document.getElementById('weatherData');
+                    weatherDataDiv.textContent = `Current weather in London: ${weatherDescription}`;
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                });
+        }
+    </script>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-
+    <h1>Weather App</h1>
+    <button onclick="getCurrentWeather()">Get Current Weather</button>
+    <div id="weatherData"></div>
 </body>
-
 </html>
